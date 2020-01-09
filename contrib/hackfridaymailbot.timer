@@ -1,0 +1,11 @@
+[Unit]
+Description=Send automated hackfriday invitation
+Requires=hackfridaymailbot.service
+
+[Timer]
+OnCalendar=Wed *-*-* 12:23:42
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

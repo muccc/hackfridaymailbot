@@ -1,0 +1,10 @@
+[Unit]
+Description=Send automated hackfriday invitation
+
+[Service]
+Type=Oneshot
+
+ExecStart=/path/to/hackfridaymailbot.sh
+
+User=username
+Group=groupname
