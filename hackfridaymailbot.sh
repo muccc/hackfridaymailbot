@@ -6,7 +6,12 @@
 # scrape the wiki - find the friday - get the content - send an email
 
 HACKFRIDAY_URL=http://wiki.muc.ccc.de/hackfriday
-EMAIL_ADDRESS=iggy@muc.ccc.de
+TO_ADDRESS=members@muc.ccc.de
+FROM_ADDRESS=hackfriday@muc.ccc.de
+
+# mail or sendmail
+MAILER=mail
+
 
 echo "Scraping $HACKFRIDAY_URL"
 
@@ -55,7 +60,10 @@ echo "*******"
 echo "$EMAIL_BODY"
 echo "*******"
 
-echo "sending email to $EMAIL_ADDRESS"
-
-mail -s "$EMAIL_SUBJECT" "$EMAIL_ADDRESS" <<<"$EMAIL_BODY" 
-
+if [ $MAILER == "mail" ] ; then
+  echo "sending email to $TO_ADDRESS using mail"
+  mail -s "$EMAIL_SUBJECT" "$EMAIL_ADDRESS" <<<"$EMAIL_BODY"
+elif [ $MAILER == "sendmail" ] ; then
+  echo "sending email to $TO_ADDRESS using sendmail"
+  echo "To:$TO_ADDRESS\nFrom:$FROM_ADDRESS\nSubject:$EMAIL_SUBJECT\n$EMAIL_BODY\n." | sendmail -t
+fi
