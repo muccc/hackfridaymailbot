@@ -20,9 +20,11 @@ echo "Scraping $HACKFRIDAY_URL"
 
 DATE_NEXT_FRIDAY=$(date -dnext-friday +%Y-%m-%d)
 DATE_NEXT_NEXT_FRIDAY=$(date -d'next-friday+7 days' +%Y-%m-%d)
+DATE_NEXT_NEXT_NEXT_FRIDAY=$(date -d'next-friday+14 days' +%Y-%m-%d)
 
 echo "Next friday: $DATE_NEXT_FRIDAY"
 echo "Next next friday: $DATE_NEXT_NEXT_FRIDAY"
+echo "Next next next friday: $DATE_NEXT_NEXT_NEXT_FRIDAY"
 
 HTML=$(curl -sS $HACKFRIDAY_URL)
 
@@ -45,6 +47,8 @@ function getText () {
 
 FRIDAY_TEXT=$(getText "$HTML" "$DATE_NEXT_FRIDAY" "$DATE_NEXT_NEXT_FRIDAY")
 
+NEXT_FRIDAY_TEXT=$(getText "$HTML" "$DATE_NEXT_NEXT_FRIDAY" "$DATE_NEXT_NEXT_NEXT_FRIDAY")
+
 
 EMAIL_SUBJECT="Hackfriday am ${DATE_NEXT_FRIDAY}"
 
@@ -62,6 +66,20 @@ Alle Angaben ohne Gewähr.
 Dieses Schreiben wurde maschinell erstellt und ist ohne Unterschrift gültig.
 EOF
 )
+
+if [[ -n $(echo $NEXT_FRIDAY_TEXT | grep TBD) ]] ; then
+
+  SUBMISSIONS_PLZ=$(cat <<EOF
+
+
+PS: Im wiki steht noch kein Thema für den übernächsten Hackfriday am ${DATE_NEXT_NEXT_FRIDAY}.
+https://wiki.muc.ccc.de/hackfriday freut sich auf Deine Einreichung.
+
+EOF
+)
+
+  EMAIL_BODY=$EMAIL_BODY+$SUBMISSIONS_PLZ
+fi
 
 
 echo
