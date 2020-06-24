@@ -25,16 +25,25 @@ echo "Next friday: $DATE_NEXT_NEXT_FRIDAY"
 echo "Next next friday: $DATE_NEXT_NEXT_FRIDAY"
 
 HTML=$(curl -sS $HACKFRIDAY_URL)
- 
-LINE_FROM=$(grep <<<"$HTML" -n "<h2.*${DATE_NEXT_FRIDAY}</h2>" | cut -f1 -d:)
-LINE_TO=$(grep <<<"$HTML" -n "<h2.*${DATE_NEXT_NEXT_FRIDAY}</h2>" | cut -f1 -d:)
-((LINE_FROM++))
-((LINE_TO--))
 
-echo "Relevant content in line $LINE_FROM to line $LINE_TO"
+function getText () {
+  HTML="$1"
+  FDATE="$2"
+  FDATE_NEXT="$3"
 
-FRIDAY_HTML=$(sed -n "${LINE_FROM},${LINE_TO}p" <<<"$HTML")
-FRIDAY_TEXT=$(sed -e 's/<[^>]*>//g' <<<"$FRIDAY_HTML" | sed '/^[[:space:]]*$/d')
+  LINE_FROM=$(grep <<<"$HTML" -n "<h2.*${FDATE}</h2>" | cut -f1 -d:)
+  LINE_TO=$(grep <<<"$HTML" -n "<h2.*${FDATE_NEXT}</h2>" | cut -f1 -d:)
+  ((LINE_FROM++))
+  ((LINE_TO--))
+
+  FRIDAY_HTML=$(awk "NR==$LINE_FROM,NR==$LINE_TO" <<< "$HTML")
+  FRIDAY_TEXT=$(sed -e 's/<[^>]*>//g' <<<"$FRIDAY_HTML" | sed '/^[[:space:]]*$/d')
+  
+  echo "$FRIDAY_TEXT"
+  return 0
+}
+
+FRIDAY_TEXT=$(getText "$HTML" "$DATE_NEXT_FRIDAY" "$DATE_NEXT_NEXT_FRIDAY")
 
 
 EMAIL_SUBJECT="Hackfriday am ${DATE_NEXT_FRIDAY}"
