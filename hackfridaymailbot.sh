@@ -21,7 +21,7 @@ echo "Scraping $HACKFRIDAY_URL"
 DATE_NEXT_FRIDAY=$(date -dnext-friday +%Y-%m-%d)
 DATE_NEXT_NEXT_FRIDAY=$(date -d'next-friday+7 days' +%Y-%m-%d)
 
-echo "Next friday: $DATE_NEXT_NEXT_FRIDAY"
+echo "Next friday: $DATE_NEXT_FRIDAY"
 echo "Next next friday: $DATE_NEXT_NEXT_FRIDAY"
 
 HTML=$(curl -sS $HACKFRIDAY_URL)
