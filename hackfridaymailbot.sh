@@ -61,6 +61,9 @@ ${FRIDAY_TEXT}
 
 Im Sommer beginnt das Programm ab 21:00, anschließend geselliges Beisammensein. 
 
+Nachdem der Club aufgrund der Ausgangsbeschränkungen geschlossen ist,findet
+der hack!friday online statt.
+
 Alle Angaben ohne Gewähr.
 
 Dieses Schreiben wurde maschinell erstellt und ist ohne Unterschrift gültig.
