@@ -59,7 +59,7 @@ Wir laden ein zum Hackfriday am ${DATE_NEXT_FRIDAY} mit folgendem Programm:
 
 ${FRIDAY_TEXT}
 
-Einlass ab 19:00, Programm ab 20:00, anschließend geselliges Beisammensein. 
+Im Sommer beginnt das Programm ab 21:00, anschließend geselliges Beisammensein. 
 
 Alle Angaben ohne Gewähr.
 
