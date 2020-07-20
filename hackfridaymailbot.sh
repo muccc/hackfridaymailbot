@@ -1,14 +1,12 @@
 #!/bin/bash
 
 # muccc hackfriday mail bot
-# hacked together by iggy@muc.ccc.de
-
 # scrape the wiki - find the friday - get the content - send an email
 
 HACKFRIDAY_URL=http://wiki.muc.ccc.de/hackfriday
-TO_ADDRESS=members@muc.ccc.de
+TO_ADDRESS=talk@muc.ccc.de
 FROM_ADDRESS=hackfriday@muc.ccc.de
-REPLYTO_ADDRESS=members@muc.ccc.de
+REPLYTO_ADDRESS=talk@muc.ccc.de
 
 CONTENT_TYPE='text/plain; charset="UTF-8"'
 
