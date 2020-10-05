@@ -40,7 +40,7 @@ function getText () {
 
   FRIDAY_HTML=$(awk "NR==$LINE_FROM,NR==$LINE_TO" <<< "$HTML")
   FRIDAY_TEXT=$(sed -e 's/<[^>]*>//g' <<<"$FRIDAY_HTML" | sed '/^[[:space:]]*$/d')
-  
+
   echo "$FRIDAY_TEXT"
   return 0
 }
@@ -59,10 +59,10 @@ Wir laden ein zum Hackfriday am ${DATE_NEXT_FRIDAY} mit folgendem Programm:
 
 ${FRIDAY_TEXT}
 
-Im Sommer beginnt das Programm ab 21:00, anschließend geselliges Beisammensein. 
+Das Programm beginnt ab 20:00h, anschließend geselliges Beisammensein. 
 
-Nachdem der Club aufgrund der Ausgangsbeschränkungen geschlossen ist,findet
-der hack!friday online statt.
+Nachdem der Club aufgrund der Ausgangsbeschränkungen momentan geschlossen ist,
+findet der hack!friday online statt.
 
 Alle Angaben ohne Gewähr.
 
@@ -70,7 +70,7 @@ Dieses Schreiben wurde maschinell erstellt und ist ohne Unterschrift gültig.
 EOF
 )
 
-if [[ -n $(echo $NEXT_FRIDAY_TEXT | grep TBD) ]] ; then
+if  echo "$NEXT_FRIDAY_TEXT" | grep -q TBD  ; then
 
   SUBMISSIONS_PLZ=$(cat <<EOF
 
@@ -81,7 +81,7 @@ https://wiki.muc.ccc.de/hackfriday freut sich auf Deine Einreichung.
 EOF
 )
 
-  EMAIL_BODY=$EMAIL_BODY+$SUBMISSIONS_PLZ
+  EMAIL_BODY=$EMAIL_BODY$SUBMISSIONS_PLZ
 fi
 
 
