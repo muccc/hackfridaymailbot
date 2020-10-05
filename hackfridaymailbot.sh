@@ -8,7 +8,6 @@
 HACKFRIDAY_URL=http://wiki.muc.ccc.de/hackfriday
 TO_ADDRESS=members@muc.ccc.de
 FROM_ADDRESS=hackfriday@muc.ccc.de
-REPLYTO_ADDRESS=members@muc.ccc.de
 
 CONTENT_TYPE='text/plain; charset="UTF-8"'
 
@@ -98,5 +97,5 @@ if [ $MAILER == "mail" ] ; then
   mail -s "$EMAIL_SUBJECT" "$EMAIL_ADDRESS" <<<"$EMAIL_BODY"
 elif [ $MAILER == "sendmail" ] ; then
   echo "sending email to $TO_ADDRESS using sendmail"
-  echo -e "To:$TO_ADDRESS\nFrom:$FROM_ADDRESS\nReply-To:$REPLYTO_ADDRESS\nContent-Type:$CONTENT_TYPE\nMIME-Version:1.0\nSubject:$EMAIL_SUBJECT\n$EMAIL_BODY\n." | sendmail -t
+  echo -e "To:$TO_ADDRESS\nFrom:$FROM_ADDRESS\nContent-Type:$CONTENT_TYPE\nMIME-Version:1.0\nSubject:$EMAIL_SUBJECT\n$EMAIL_BODY\n." | sendmail -t
 fi
