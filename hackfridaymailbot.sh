@@ -5,7 +5,7 @@
 
 # scrape the wiki - find the friday - get the content - send an email
 
-HACKFRIDAY_URL=http://wiki.muc.ccc.de/hackfriday
+HACKFRIDAY_URL=https://wiki.muc.ccc.de/hackfriday
 TO_ADDRESS=members@muc.ccc.de
 FROM_ADDRESS=hackfriday@muc.ccc.de
 
